@@ -7,7 +7,7 @@ const main = async (data, url) => {
     try {
         const result = await (0, axios_master_1.axiosMasterLogger)({
             method: "POST",
-            url: encodeURI(url || host),
+            url: encodeURI(`${url || host}/cron-job/v1/list`),
             headers: {
                 "Content-Type": "application/json",
             },

@@ -13,7 +13,7 @@ const main = async (data: cronJobNodeDataT, url?: string): Promise<boolean> => {
     const result = await axiosMasterLogger(
       {
         method: "POST",
-        url: encodeURI(url || host),
+        url: encodeURI(`${url || host}/cron-job/v1/list`),
         headers: {
           "Content-Type": "application/json",
         },
