@@ -1,0 +1,43 @@
+{
+  "name": "cron-job-node",
+  "version": "1.0.0",
+  "description": "JOB API",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-ts": "npx tsc",
+    "build": "npx tsc",
+    "debug": "npm run build && npm run watch-debug",
+    "lint": "tsc --noEmit && eslint \"**/*.{js,ts}\" --quiet --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/togtokh-dev/cron-job-node.git"
+  },
+  "keywords": [
+    "TOGTOKH",
+    "TOKI-APP",
+    "MINI-APP",
+    "QUERY-PARAM"
+  ],
+  "author": "TOGTOKH.DEV",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/togtokh-dev/cron-job-node/issues"
+  },
+  "homepage": "https://github.com/togtokh-dev/cron-job-node#readme",
+  "dependencies": {
+    "axios-master": "^1.1.4",
+    "typescript": "^5.0.4"
+  },
+  "devDependencies": {
+    "@types/node": "^18.15.11",
+    "@typescript-eslint/eslint-plugin": "^6.4.0",
+    "@typescript-eslint/parser": "^6.4.0",
+    "eslint": "^8.47.0"
+  }
+}
