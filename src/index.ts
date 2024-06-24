@@ -1,8 +1,7 @@
-import { axiosMasterLogger } from "axios-master";
-import { AxiosRequestConfig } from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 export type cronJobNodeDataT = {
   id: string;
-  config: any;
+  config: any | AxiosRequestConfig;
   job_time: string;
   status: boolean;
   type_name: "prod" | "staging" | "dev";
@@ -10,19 +9,14 @@ export type cronJobNodeDataT = {
 let host = "";
 const main = async (data: cronJobNodeDataT, url?: string): Promise<boolean> => {
   try {
-    const result = await axiosMasterLogger(
-      {
-        method: "POST",
-        url: encodeURI(`${url || host}/cron-job/v1/list`),
-        headers: {
-          "Content-Type": "application/json",
-        },
-        data: JSON.stringify(data),
+    const result = await axios({
+      method: "POST",
+      url: encodeURI(`${url || host}/cron-job/v1/list`),
+      headers: {
+        "Content-Type": "application/json",
       },
-      {
-        name: "create-and-update",
-      }
-    );
+      data: JSON.stringify(data),
+    });
     if (result) {
       return true;
     } else {

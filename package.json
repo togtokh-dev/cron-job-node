@@ -1,6 +1,6 @@
 {
   "name": "cron-job-node",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "JOB API",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -31,7 +31,6 @@
   },
   "homepage": "https://github.com/togtokh-dev/cron-job-node#readme",
   "dependencies": {
-    "axios-master": "^1.1.4",
     "typescript": "^5.0.4"
   },
   "devDependencies": {
