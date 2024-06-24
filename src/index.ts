@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig } from "axios";
+import * as https from "https";
 export type cronJobNodeDataT = {
   id: string;
   config: any | AxiosRequestConfig;
@@ -9,14 +10,19 @@ export type cronJobNodeDataT = {
 let host = "";
 const main = async (data: cronJobNodeDataT, url?: string): Promise<boolean> => {
   try {
-    const result = await axios({
+    const httpsAgent = new https.Agent({
+      rejectUnauthorized: false,
+    });
+    const config: AxiosRequestConfig = {
+      httpsAgent: httpsAgent,
       method: "POST",
       url: encodeURI(`${url || host}/cron-job/v1/list`),
       headers: {
         "Content-Type": "application/json",
       },
       data: JSON.stringify(data),
-    });
+    };
+    const result = await axios(config);
     if (result) {
       return true;
     } else {
