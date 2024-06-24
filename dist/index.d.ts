@@ -1,7 +1,6 @@
-import { AxiosRequestConfig } from "axios";
 export type cronJobNodeDataT = {
     id: string;
-    config: any | AxiosRequestConfig;
+    config: any;
     job_time: string;
     status: boolean;
     type_name: "prod" | "staging" | "dev";
