@@ -1,0 +1,53 @@
+name: Publish to npm
+
+# main руу push хийхэд ажиллана. package.json доторх version нь npm дээр
+# хараахан нийтлэгдээгүй бол л publish хийнэ — "version bump + push = publish".
+#
+# Нэвтрэлт: npm Trusted Publisher (OIDC) — secret/token ХЭРЭГГҮЙ.
+# npm дээр тохируулах: Package → Settings → Trusted Publisher → GitHub Actions
+#   Organization/user: togtokh-dev
+#   Repository:        cron-job-node
+#   Workflow filename: publish.yml
+#   Allow npm publish: ☑
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # OIDC trusted publishing-д заавал
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          registry-url: "https://registry.npmjs.org"
+
+      # OIDC trusted publishing npm CLI >= 11.5.1 шаарддаг
+      - name: Upgrade npm
+        run: npm install -g npm@latest
+
+      - name: Install
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
+      - name: Publish if version is new
+        run: |
+          NAME=$(node -p "require('./package.json').name")
+          VERSION=$(node -p "require('./package.json').version")
+          echo "Checking $NAME@$VERSION ..."
+          if npm view "$NAME@$VERSION" version > /dev/null 2>&1; then
+            echo "✔ $NAME@$VERSION аль хэдийн нийтлэгдсэн — алгаслаа."
+          else
+            echo "→ Нийтэлж байна: $NAME@$VERSION"
+            npm publish --access public
+          fi

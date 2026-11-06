@@ -1,28 +1,36 @@
 {
   "name": "cron-job-node",
-  "version": "1.0.4",
-  "description": "JOB API",
+  "version": "1.1.0",
+  "description": "Хуваарьт HTTP ажлуудаа cron-job сервис рүү бүртгэх хөнгөн Node.js/TypeScript SDK. A tiny Node.js/TypeScript SDK to register scheduled HTTP jobs with a cron-job service.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
-    "dist/"
+    "dist/",
+    "README.md",
+    "LICENSE"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build-ts": "npx tsc",
-    "build": "npx tsc",
-    "debug": "npm run build && npm run watch-debug",
-    "lint": "tsc --noEmit && eslint \"**/*.{js,ts}\" --quiet --fix"
+    "build": "tsc",
+    "build-ts": "tsc",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run build",
+    "test": "ts-node test/index.ts",
+    "lint": "tsc --noEmit"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/togtokh-dev/cron-job-node.git"
   },
   "keywords": [
-    "TOGTOKH",
-    "TOKI-APP",
-    "MINI-APP",
-    "QUERY-PARAM"
+    "cron",
+    "cron-job",
+    "scheduler",
+    "scheduled-jobs",
+    "http",
+    "sdk",
+    "node",
+    "typescript",
+    "togtokh"
   ],
   "author": "TOGTOKH.DEV",
   "license": "ISC",
@@ -31,12 +39,11 @@
   },
   "homepage": "https://github.com/togtokh-dev/cron-job-node#readme",
   "dependencies": {
-    "typescript": "^5.0.4"
+    "axios": "^1.7.9"
   },
   "devDependencies": {
-    "@types/node": "^18.15.11",
-    "@typescript-eslint/eslint-plugin": "^6.4.0",
-    "@typescript-eslint/parser": "^6.4.0",
-    "eslint": "^8.47.0"
+    "@types/node": "^20.17.12",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
   }
 }
