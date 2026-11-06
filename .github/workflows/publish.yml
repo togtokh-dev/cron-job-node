@@ -9,6 +9,9 @@ name: Publish to npm
 #   Repository:        cron-job-node
 #   Workflow filename: publish.yml
 #   Allow npm publish: ☑
+#
+# Node 24 нь OIDC trusted publishing-д шаардагдах npm (>= 11.5.1)-тэй ирдэг
+# тул npm-г нэмж шинэчлэх шаардлагагүй.
 on:
   push:
     branches: [main]
@@ -27,12 +30,11 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "24"
           registry-url: "https://registry.npmjs.org"
 
-      # OIDC trusted publishing npm CLI >= 11.5.1 шаарддаг
-      - name: Upgrade npm
-        run: npm install -g npm@latest
+      - name: npm version
+        run: npm -v
 
       - name: Install
         run: npm install
